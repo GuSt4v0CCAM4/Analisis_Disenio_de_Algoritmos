@@ -1,15 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <climits>
-
-int cambioMonedas(const std::vector<int>& monedas, int cantidad) {
-    std::vector<int> dp(cantidad + 1, INT_MAX);
+using namespace std;
+int cambioMonedas(const vector<int>& monedas, int cantidad) {
+    vector<int> dp(cantidad + 1, INT_MAX);
     dp[0] = 0;
 
     for (int i = 1; i <= cantidad; ++i) {
         for (int j = 0; j < monedas.size(); ++j) {
             if (monedas[j] <= i && dp[i - monedas[j]] != INT_MAX) {
-                dp[i] = std::min(dp[i], dp[i - monedas[j]] + 1);
+                dp[i] = min(dp[i], dp[i - monedas[j]] + 1);
             }
         }
     }
@@ -18,12 +18,12 @@ int cambioMonedas(const std::vector<int>& monedas, int cantidad) {
 }
 
 int main() {
-    std::vector<int> monedas = {1, 2, 5};
+    vector<int> monedas = {1, 2, 5};
     int cantidad = 11;
 
     int minMonedas = cambioMonedas(monedas, cantidad);
 
-    std::cout << "Cantidad mínima de monedas requeridas: " << minMonedas << std::endl;
+    cout << "Cantidad mínima de monedas requeridas: " << minMonedas << endl;
 
     return 0;
 }
